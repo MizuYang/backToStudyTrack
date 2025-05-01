@@ -1,0 +1,19 @@
+// .vscode/settings.json
+{
+  "editor.formatOnSave": false,
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll": "always",
+  //   "source.fixAll.eslint": "always"
+  // },
+  "tailwindCSS.includeLanguages": {
+    "html": "html",
+    "javascript": "javascript",
+    "vue": "html"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "cSpell.words": [
+    "nuxtjs"
+  ]
+}
