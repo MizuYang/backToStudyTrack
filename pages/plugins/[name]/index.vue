@@ -12,6 +12,7 @@ const articles = ref<Articles[]>([
 
 <template>
   <div>
+    <Breadcrumb />
     <Articles
       v-model:articles="articles"
       :base-router-path="'/plugins/nuxt-swiper'"
