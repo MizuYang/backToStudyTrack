@@ -1,4 +1,4 @@
-<script lang='ts' setup>
+<script lang="ts" setup>
 const pluginsMenu = ref([
   {
     name: 'nuxt-swiper',
@@ -13,8 +13,9 @@ const pluginsMenu = ref([
 
 <template>
   <div>
+    <Breadcrumb />
     <MainMenu v-model:menu="pluginsMenu" />
   </div>
 </template>
 
-<style lang='scss' scoped></style>
+<style lang="scss" scoped></style>
