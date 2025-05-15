@@ -7,6 +7,11 @@ const breadcrumbs = ref<string[]>(route.fullPath.split('/').slice(1))
 <template>
   <nav>
     <ul class="flex">
+      <li>
+        <nuxt-link to="/" class="breadcrumb-link">
+          首頁
+        </nuxt-link>
+      </li>
       <li v-for="(item, idx) in breadcrumbs" :key="item">
         <span class="mx-2">/</span>
         <nuxt-link
