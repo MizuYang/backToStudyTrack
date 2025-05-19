@@ -3,7 +3,10 @@
 </script>
 
 <template>
-  <div>customComponents</div>
+  <div>
+    <Breadcrumbs />
+    customComponents
+  </div>
 </template>
 
 <style lang='scss' scoped></style>
