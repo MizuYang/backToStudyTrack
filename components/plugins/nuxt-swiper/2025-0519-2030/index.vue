@@ -2,7 +2,7 @@
 
 <template>
   <section>
-    <Swiper :autoplay="false" :navigation="true">
+    <Swiper :autoplay="false" :use-custom-pagination-arrow="{ enabled: true }">
       <swiper-slide v-for="i in 10" :key="i">
         <p class="text-center">
           {{ i }}
