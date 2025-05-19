@@ -29,15 +29,32 @@ const breakpoints = defineModel<SwiperOptions['breakpoints']>('breakpoints', {
   default: () => ({})
 })
 const autoplay = defineModel<SwiperOptions['autoplay']>('autoplay', {
-  default: () => ({
-    delay: 5000,
+  default: {
+    delay: 500,
     disableOnInteraction: false
-  })
+  }
 })
 const allowTouchMove = defineModel<SwiperOptions['allowTouchMove']>(
   'allowTouchMove',
   {
     default: true
+  }
+)
+const mousewheel = defineModel<SwiperOptions['mousewheel']>('mousewheel', {
+  default: {
+    enabled: false,
+    invert: false
+  }
+})
+const keyboard = defineModel<SwiperOptions['keyboard']>('keyboard', {
+  default: false
+})
+const hashNavigation = defineModel<SwiperOptions['hashNavigation']>(
+  'hashNavigation',
+  {
+    default: {
+      replaceState: true
+    }
   }
 )
 
@@ -105,14 +122,27 @@ onUnmounted(() => {
         loop,
         autoplay,
         allowTouchMove,
+        mousewheel,
+        keyboard,
+        hashNavigation,
       }"
     >
       <slot />
     </swiper-container>
 
     <template v-if="useCustomPaginationArrow?.enabled">
-      <button ref="leftArrow" type="button" class="custom-swiper-arrow left" @click="goToPrev" />
-      <button ref="rightArrow" type="button" class="custom-swiper-arrow right" @click="goToNext" />
+      <button
+        ref="leftArrow"
+        type="button"
+        class="custom-swiper-arrow left"
+        @click="goToPrev"
+      />
+      <button
+        ref="rightArrow"
+        type="button"
+        class="custom-swiper-arrow right"
+        @click="goToNext"
+      />
     </template>
   </div>
 </template>

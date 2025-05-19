@@ -1,13 +1,14 @@
 <script lang="ts" setup>
-const breakpoints = ref({
-  640: {
-    slidesPerView: 1,
-    spaceBetween: 10
-  },
-  768: {
-    slidesPerView: 2,
-    spaceBetween: 20
-  },
+import type { SwiperOptions } from 'swiper/types'
+const breakpoints = ref<Record<number, SwiperOptions>>({
+  // 640: {
+  //   slidesPerView: 1,
+  //   spaceBetween: 10
+  // },
+  // 768: {
+  //   slidesPerView: 2,
+  //   spaceBetween: 20
+  // },
   1024: {
     slidesPerView: 3,
     spaceBetween: 30
@@ -22,8 +23,14 @@ const breakpoints = ref({
       :use-custom-pagination-arrow="{ enabled: true }"
       :breakpoints="breakpoints"
     >
-      <swiper-slide v-for="i in 9" :key="i">
-        <div class="text-center">
+      <swiper-slide
+        v-for="i in 9"
+        :key="i"
+        :data-hash="`slide-${i}`"
+      >
+        <div
+          class="h-[100px] w-[100px] bg-red-300/50 text-center leading-[100px]"
+        >
           {{ i }}
         </div>
       </swiper-slide>
