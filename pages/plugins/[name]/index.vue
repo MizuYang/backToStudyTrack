@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-const { getArticles } = useArticle()
-const { articles } = getArticles()
+const { articles } = useArticle()
 </script>
 
 <template>
