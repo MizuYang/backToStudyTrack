@@ -52,9 +52,7 @@ const keyboard = defineModel<SwiperOptions['keyboard']>('keyboard', {
 const hashNavigation = defineModel<SwiperOptions['hashNavigation']>(
   'hashNavigation',
   {
-    default: {
-      replaceState: true
-    }
+    default: false
   }
 )
 
@@ -63,6 +61,8 @@ const swiper = useSwiper(swiperRef)
 
 const goToPrev = (): void => swiper.prev()
 const goToNext = (): void => swiper.next()
+
+const isClient = ref(import.meta.client)
 
 const leftArrow = ref<HTMLButtonElement | null>(null)
 const rightArrow = ref<HTMLButtonElement | null>(null)
@@ -104,10 +104,14 @@ const debouncedCustomPaginationArrow = debounce(100, customPaginationArrow)
 
 onMounted(() => {
   customPaginationArrow()
-  window.addEventListener('resize', debouncedCustomPaginationArrow)
+  if (isClient.value) {
+    window?.addEventListener('resize', debouncedCustomPaginationArrow)
+  }
 })
 onUnmounted(() => {
-  window.removeEventListener('resize', debouncedCustomPaginationArrow)
+  if (isClient.value) {
+    window?.removeEventListener('resize', debouncedCustomPaginationArrow)
+  }
 })
 </script>
 
