@@ -1,9 +1,15 @@
-<script lang='ts' setup>
-
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <div>1312346587</div>
+  <section>
+    <Swiper :autoplay="false" :navigation="true">
+      <swiper-slide v-for="i in 10" :key="i">
+        <p class="text-center">
+          {{ i }}
+        </p>
+      </swiper-slide>
+    </Swiper>
+  </section>
 </template>
 
-<style lang='scss' scoped></style>
+<style lang="scss" scoped></style>
