@@ -35,6 +35,6 @@ const breakpoints = ref({
 // 修改 Swiper 的箭頭樣式
 // :deep(.custom-swiper-arrow.left),
 // :deep(.custom-swiper-arrow.right) {
-//   border: 2px solid red !important;
+// border: 2px solid red !important;
 // }
 </style>

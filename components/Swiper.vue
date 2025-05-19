@@ -64,26 +64,20 @@ const customPaginationArrow = (): void => {
   if (!paginationEl) {
     return
   }
-  let paginationTop = 0
-  let firstBulletLeft = 0
-  let lastBulletRight = 0
-  paginationTop = paginationEl.getBoundingClientRect().top
-  firstBulletLeft =
+
+  const paginationTop = paginationEl.getBoundingClientRect().top
+  const firstBulletLeft =
     [...paginationEl.children].at(0)?.getBoundingClientRect().left ?? 0
-  lastBulletRight =
+  const lastBulletRight =
     [...paginationEl.children].at(-1)?.getBoundingClientRect().right ?? 0
 
   if (leftArrow.value) {
-    leftArrow.value.className = 'custom-swiper-arrow left'
-    leftArrow.value.setAttribute('part', 'custom-pagination-arrow-left')
     leftArrow.value.style.backgroundImage = `url("${useCustomPaginationArrow.value?.leftArrow?.iconUrl || '/icons/arrow-left.svg'}")`
     leftArrow.value.style.top = `${paginationTop}px`
     leftArrow.value.style.left = `${firstBulletLeft - 30}px` // 30px 是箭頭的寬度
   }
 
   if (rightArrow.value) {
-    rightArrow.value.className = 'custom-swiper-arrow right'
-    rightArrow.value.setAttribute('part', 'custom-pagination-arrow-right')
     rightArrow.value.style.backgroundImage = `url("${useCustomPaginationArrow.value?.rightArrow?.iconUrl || '/icons/arrow-right.svg'}")`
     rightArrow.value.style.top = `${paginationTop}px`
     rightArrow.value.style.left = `${lastBulletRight + 10}px` // 10px 是箭頭和最後一個圓點的間距
@@ -93,8 +87,6 @@ const debouncedCustomPaginationArrow = debounce(100, customPaginationArrow)
 
 onMounted(() => {
   customPaginationArrow()
-  // bindCustomPaginationClick()
-
   window.addEventListener('resize', debouncedCustomPaginationArrow)
 })
 onUnmounted(() => {
@@ -117,16 +109,11 @@ onUnmounted(() => {
     >
       <slot />
     </swiper-container>
-    <button
-      ref="leftArrow"
-      type="button"
-      @click="goToPrev"
-    />
-    <button
-      ref="rightArrow"
-      type="button"
-      @click="goToNext"
-    />
+
+    <template v-if="useCustomPaginationArrow?.enabled">
+      <button ref="leftArrow" type="button" class="custom-swiper-arrow left" @click="goToPrev" />
+      <button ref="rightArrow" type="button" class="custom-swiper-arrow right" @click="goToNext" />
+    </template>
   </div>
 </template>
 
