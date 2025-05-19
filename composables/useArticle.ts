@@ -1,31 +1,26 @@
+import type { Article, UseArticle } from '~/types'
 import { articles as allArticles } from '@/articles'
 
 console.log('allArticles: ', allArticles)
 
-// interface Article {
-//   title: string;
-//   notionCardId: string;
-//   notionPath: string;
-// }
-// interface ArticleList {
-//   [key: string]: {
-//     [key: string]: Article[];
-//   };
-
-export const useArticle = (): any => {
-  // }
+export const useArticle = (): UseArticle => {
   const route = useRoute()
-  const articles = ref<any>({})
-  const article = ref<any>({})
+  const articles = ref<Article[]>([])
+  const article = ref<Article>({
+    title: '',
+    notionCardId: '',
+    notionPath: ''
+  })
+
   const [lv1, lv2, lv3] = route.fullPath.split('/').slice(1)
 
   // 用 glob 匹配所有三層資料夾下的 index.vue
   const modules = import.meta.glob('@/components/*/*/*/index.vue')
 
-  const getArticles = (): any => {
+  const getArticles = (): void => {
     articles.value = allArticles?.[lv1]?.[lv2] || []
     article.value = articles.value.filter(
-      (item: any) => item.notionCardId === route.params.notionCardId
+      item => item?.notionCardId === route.params?.notionCardId
     )[0]
   }
 
@@ -36,11 +31,11 @@ export const useArticle = (): any => {
     }
     // 找到對應的元件路徑
     const matchedPath = Object.keys(modules).find(path =>
-      path.includes(`/${article.value.notionCardId}/index.vue`)
+      path.includes(`/${article.value?.notionCardId}/index.vue`)
     )
     if (matchedPath) {
       article.value.component = shallowRef(
-        defineAsyncComponent(modules[matchedPath] as () => Promise<any>)
+        defineAsyncComponent(modules[matchedPath] as () => Promise<Component>)
       )
     } else {
       article.value.component = null
@@ -49,15 +44,15 @@ export const useArticle = (): any => {
 
   const init = (): void => {
     getArticles()
-    if (lv3) { getCurrentDynamicComponent() }
+    if (lv3) {
+      getCurrentDynamicComponent()
+    }
   }
 
   init()
 
   return {
     article,
-    articles,
-    getArticles,
-    getCurrentDynamicComponent
+    articles
   }
 }

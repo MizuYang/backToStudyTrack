@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { Articles } from '~/types'
+import type { Article } from '~/types'
 
-const articles = defineModel<Articles[]>('articles', { required: true })
+const articles = defineModel<Article[]>('articles', { required: true })
 const baseRouterPath = defineModel<string>('base-router-path', { required: true })
 
 const notionBaseUrl = 'https://www.notion.so/'
