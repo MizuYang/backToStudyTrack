@@ -3,7 +3,10 @@ const options = {
   licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
   menu: '#menu',
   anchors: ['page1', 'page2', 'page3', 'page4', 'page5'],
-  sectionsColor: ['#41b883', '#ff5f45', '#0798ec', 'yellow', 'purple']
+  sectionsColor: ['#41b883', '#ff5f45', '#0798ec', 'yellow', 'purple'],
+  scrollingSpeed: 700, // 滾動速度
+  loopTop: true, // 是否循環滾動到頂部
+  loopBottom: true // 是否循環滾動到底部
 }
 </script>
 
