@@ -2,6 +2,7 @@
 const route = useRoute()
 
 const breadcrumbs = ref<string[]>(route.fullPath.split('/').slice(1))
+const { article } = useArticle()
 </script>
 
 <template>
@@ -17,9 +18,11 @@ const breadcrumbs = ref<string[]>(route.fullPath.split('/').slice(1))
         <nuxt-link
           :to="`/${breadcrumbs.slice(0, idx + 1).join('/')}`"
           class="breadcrumb-link"
+          :class="{ 'font-normal': idx === breadcrumbs.length - 1 }"
         >
           {{ item }}
           <template v-if="idx === breadcrumbs.length - 1">
+            -{{ article?.title }}
             <span>(目前位置)</span>
           </template>
         </nuxt-link>
@@ -31,5 +34,8 @@ const breadcrumbs = ref<string[]>(route.fullPath.split('/').slice(1))
 <style lang="scss" scoped>
 .breadcrumb-link {
   @apply inline-block font-bold text-blue-500 transition-transform duration-100 hover:scale-[1.02];
+}
+.font-normal {
+  @apply cursor-default text-gray-700 hover:scale-[1];
 }
 </style>
