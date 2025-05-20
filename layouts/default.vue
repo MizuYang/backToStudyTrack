@@ -4,6 +4,8 @@
   <div>
     <Header />
     <slot />
+
+    <div id="fullScreen" class="!absolute top-0 w-full" />
   </div>
 </template>
 

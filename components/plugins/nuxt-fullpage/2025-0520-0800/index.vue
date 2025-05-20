@@ -1,23 +1,24 @@
-<script lang='ts' setup>
-const options = {
-  licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-  menu: '#menu',
-  anchors: ['page1', 'page2', 'page3'],
-  sectionsColor: ['#41b883', '#ff5f45', '#0798ec']
-}
+<script lang="ts" setup>
+import FullPage from './FullPage.vue'
+import FullScreenToggleBtn from './FullScreenToggleBtn.vue'
+
+const isFullScreen = ref(false)
 </script>
 
 <template>
   <div>
-    <full-page id="fullpage" ref="fullpage" :options="options">
-      <div class="section">
-        First section ...
-      </div>
-      <div class="section">
-        Second section ...
-      </div>
-    </full-page>
+    <template v-if="isFullScreen">
+      <teleport to="#fullScreen">
+        <FullPage />
+      </teleport>
+    </template>
+
+    <template v-else>
+      <FullPage />
+    </template>
+
+    <FullScreenToggleBtn v-model:use-full-screen="isFullScreen" />
   </div>
 </template>
 
-<style lang='scss' scoped></style>
+<style lang="scss" scoped></style>

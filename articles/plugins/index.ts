@@ -1,5 +1,5 @@
 import { nuxtSwiperArticles } from './nuxt-swiper'
-import { nuxtFullPageArticles } from './nuxt-fullPage'
+import { nuxtFullPageArticles } from './nuxt-fullpage'
 
 export const plugins = {
   'nuxt-swiper': nuxtSwiperArticles,
