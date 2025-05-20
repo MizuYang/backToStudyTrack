@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import type { Article } from '~/types'
 
+const route = useRoute()
+
 const articles = defineModel<Article[]>('articles', { required: true })
-const baseRouterPath = defineModel<string>('base-router-path', { required: true })
 
 const notionBaseUrl = 'https://www.notion.so/'
 </script>
@@ -16,7 +17,10 @@ const notionBaseUrl = 'https://www.notion.so/'
     >
       <article class="mr-10 flex">
         <span class="mr-5 inline-block text-2xl">{{ idx + 1 }}.</span>
-        <NuxtLink :to="`${baseRouterPath}/${article?.notionCardId}`" class="article-link">
+        <NuxtLink
+          :to="`${route.fullPath}/${article?.notionCardId}`"
+          class="article-link"
+        >
           <span>
             {{ article?.notionCardId }} -
             {{ article?.title }}
