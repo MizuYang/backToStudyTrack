@@ -1,11 +1,13 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const { isFullScreen } = useFullPage()
+</script>
 
 <template>
   <div>
     <Header />
     <slot />
 
-    <div id="fullScreen" class="!absolute top-0 w-full" />
+    <div id="fullScreen" :class="{ '!absolute top-0 w-full': isFullScreen }" />
   </div>
 </template>
 
