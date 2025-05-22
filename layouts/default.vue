@@ -5,6 +5,7 @@ const { isFullScreen } = useFullPage()
 <template>
   <div>
     <Header />
+    <Breadcrumb />
     <slot />
 
     <div id="fullScreen" :class="{ '!absolute top-0 w-full': isFullScreen }" />

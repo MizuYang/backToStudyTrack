@@ -4,7 +4,6 @@ const { articles } = useArticle()
 
 <template>
   <div>
-    <Breadcrumb />
     <Articles v-model:articles="articles" />
   </div>
 </template>

@@ -3,6 +3,10 @@ const route = useRoute()
 
 const breadcrumbs = ref<string[]>(route.fullPath.split('/').slice(1))
 const { article } = useArticle()
+
+watchEffect(() => {
+  breadcrumbs.value = route.fullPath.split('/').slice(1)
+})
 </script>
 
 <template>
@@ -22,8 +26,7 @@ const { article } = useArticle()
         >
           {{ item }}
           <template v-if="idx === breadcrumbs.length - 1">
-            -{{ article?.title }}
-            <span>(目前位置)</span>
+            {{ article?.title ? `-${article?.title}` : "" }}
           </template>
         </nuxt-link>
       </li>

@@ -4,7 +4,6 @@
 
 <template>
   <div>
-    <Breadcrumbs />
     customComponents
   </div>
 </template>

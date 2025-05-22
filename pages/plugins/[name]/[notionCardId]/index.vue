@@ -4,7 +4,6 @@ const { article } = useArticle()
 
 <template>
   <div>
-    <Breadcrumb />
     <component :is="article?.component" />
   </div>
 </template>
