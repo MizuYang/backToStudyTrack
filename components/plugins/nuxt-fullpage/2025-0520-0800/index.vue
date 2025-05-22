@@ -2,7 +2,7 @@
 import FullPage from './FullPage.vue'
 import FullScreenToggleBtn from './FullScreenToggleBtn.vue'
 
-const isFullScreen = ref(false)
+const { isFullScreen } = useFullPage()
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const isFullScreen = ref(false)
       <FullPage />
     </template>
 
-    <FullScreenToggleBtn v-model:use-full-screen="isFullScreen" />
+    <FullScreenToggleBtn />
   </div>
 </template>
 
