@@ -1,5 +1,7 @@
 import { pluginMenuList } from './plugins'
 
-export {
-  pluginMenuList
+const menuList = {
+  plugins: pluginMenuList
 }
+
+export { menuList }

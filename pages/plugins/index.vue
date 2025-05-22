@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { pluginMenuList } from '~/menuList/lv1Menu'
+import { pluginMenuList } from '~/menuList/lv1Menu/plugins'
 
 console.log('pluginMenuList: ', pluginMenuList)
 </script>
