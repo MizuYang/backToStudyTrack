@@ -1,4 +1,3 @@
-
 export interface Article {
   title: string;
   // 建立此 notion 筆記的日期 年-月-時分, 例: 2023-1001-1200
@@ -17,4 +16,12 @@ export interface Articles {
 export interface UseArticle {
   article: Ref<Article>;
   articles: Ref<Article[]>;
+}
+
+export interface MenuList {
+  name: string;
+  description: string;
+  path: string;
+  imgUrl: string;
+  pagesLength?: number;
 }

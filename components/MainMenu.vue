@@ -1,13 +1,7 @@
 <script lang="ts" setup>
-interface Menu {
-  name: string;
-  description: string;
-  path: string;
-  imgUrl: string;
-  pagesLength: number;
-}
+import type { MenuList } from '@/types'
 
-const menu = defineModel<Menu[]>('menu', { required: true })
+const menu = defineModel<MenuList[]>('menu', { required: true })
 </script>
 
 <template>
@@ -17,10 +11,11 @@ const menu = defineModel<Menu[]>('menu', { required: true })
       :key="item?.name"
       class="rounded-lg bg-gray-500 shadow-xl"
     >
-      <nuxt-link :to="item?.path" class="inline-block w-full h-full">
+      <nuxt-link :to="item?.path" class="inline-block h-full w-full">
         <img :src="item?.imgUrl" class="cover-img" :alt="item?.name">
         <span class="menu-title">
-          <span class="font-black text-lg">{{ item?.name }} ({{ item?.pagesLength }}筆)</span> <br>
+          <span class="text-lg font-black">{{ item?.name }} ({{ item?.pagesLength }}筆)</span>
+          <br>
           {{ item?.description }}
         </span>
       </nuxt-link>
