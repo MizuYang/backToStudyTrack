@@ -25,7 +25,7 @@ const menu = defineModel<MenuList[]>('menu', { required: true })
 
 <style lang="scss" scoped>
 .menu-wrap {
-  @apply mx-auto grid max-w-[1200px] grid-cols-3 gap-12 pt-[100px];
+  @apply mx-auto grid max-w-[1200px] grid-cols-3 gap-12 py-[25px];
 }
 .cover-img {
   @apply h-[250px] w-full rounded-t-lg object-cover;
