@@ -5,11 +5,12 @@ onMounted(async () => {
   await nextTick()
   gsap.to('.box-to', { x: 500 })
   gsap.from('.box-from', { x: 500 })
+  gsap.fromTo('.box-fromTo', { x: 500 }, { x: 250 })
 })
 </script>
 
 <template>
-  <div class="m-5 flex flex-col items-start">
+  <div class="m-5 flex flex-col gap-y-3 items-start">
     <div
       class="box-to inline-block h-[100px] bg-purple-200 px-5 leading-[100px]"
     >
@@ -17,6 +18,11 @@ onMounted(async () => {
     </div>
     <div
       class="box-from inline-block h-[100px] bg-purple-300 px-5 leading-[100px]"
+    >
+      <code>gsap.from('.box-from', { x: 500 })</code>
+    </div>
+    <div
+      class="box-fromTo inline-block h-[100px] bg-purple-400 px-5 leading-[100px]"
     >
       <code>gsap.from('.box-from', { x: 500 })</code>
     </div>
