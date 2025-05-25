@@ -4,6 +4,7 @@ const { gsap } = useGsap()
 onMounted(async () => {
   await nextTick()
   gsap.to('.box-to', { x: 500 })
+  gsap.from('.box-from', { x: 500 })
 })
 </script>
 
@@ -13,6 +14,11 @@ onMounted(async () => {
       class="box-to inline-block h-[100px] bg-purple-200 px-5 leading-[100px]"
     >
       <code>gsap.to('.box-to', { x: 500 })</code>
+    </div>
+    <div
+      class="box-from inline-block h-[100px] bg-purple-300 px-5 leading-[100px]"
+    >
+      <code>gsap.from('.box-from', { x: 500 })</code>
     </div>
   </div>
 </template>
