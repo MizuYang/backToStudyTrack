@@ -12,31 +12,55 @@ onMounted(async () => {
     duration: 2.5,
     ease: 'elastic.out(1,0.3)'
   })
+  gsap.to('.box-staggers', {
+    x: () => window.innerWidth / 2,
+    xPercent: 100,
+    duration: 2,
+    stagger: 0.3,
+    ease: 'elastic.out(1,0.3)',
+    yoyo: true,
+    repeat: -1
+  })
 })
 </script>
 
 <template>
   <div class="m-5 flex flex-col items-start gap-y-3">
-    <div class="box box-to bg-purple-200">
+    <div class="box box-to">
       <code>gsap.to('.box-to', { x: 500 })</code>
     </div>
-    <div class="box box-from bg-purple-300">
+    <div class="box box-from">
       <code>gsap.from('.box-from', { x: 500 })</code>
     </div>
-    <div class="box box-fromTo bg-purple-400">
+    <div class="box box-fromTo">
       <code>gsap.fromTo('.box-fromTo', { x: 500 }, { x: 250 })</code>
     </div>
-    <div class="box box-set bg-purple-500">
+    <div class="box box-set">
       <code>gsap.set('.box-set', { x: 150 })</code>
     </div>
-    <div class="box box-ease bg-purple-500">
+    <div class="box box-ease">
       <code>ease: 'elastic.out(1,0.3)'</code>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <div class="box box-staggers">
+        stagger
+      </div>
+      <div class="box box-staggers">
+        stagger
+      </div>
+      <div class="box box-staggers">
+        stagger
+      </div>
+      <div class="box box-staggers">
+        stagger
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .box {
-  @apply inline-block h-[100px] px-5 leading-[100px];
+  @apply inline-block h-[100px] px-5 leading-[100px] bg-gray-300;
 }
 </style>
