@@ -7,6 +7,11 @@ onMounted(async () => {
   gsap.from('.box-from', { x: 500 })
   gsap.fromTo('.box-fromTo', { x: 500 }, { x: 250 })
   gsap.set('.box-set', { x: 150 })
+  gsap.to('.box-ease', {
+    x: '50vw',
+    duration: 2.5,
+    ease: 'elastic.out(1,0.3)'
+  })
 })
 </script>
 
@@ -22,7 +27,10 @@ onMounted(async () => {
       <code>gsap.fromTo('.box-fromTo', { x: 500 }, { x: 250 })</code>
     </div>
     <div class="box box-set bg-purple-500">
-      <code> gsap.set('.box-set', { x: 150 })</code>
+      <code>gsap.set('.box-set', { x: 150 })</code>
+    </div>
+    <div class="box box-ease bg-purple-500">
+      <code>ease: 'elastic.out(1,0.3)'</code>
     </div>
   </div>
 </template>
