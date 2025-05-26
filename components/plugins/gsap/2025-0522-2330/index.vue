@@ -42,7 +42,7 @@ onMounted(async () => {
       <code>ease: 'elastic.out(1,0.3)'</code>
     </div>
 
-    <div class="flex flex-col gap-2">
+    <div class="bg-blue-200/20 w-full flex flex-col items-start gap-2">
       <div class="box box-staggers">
         stagger
       </div>
@@ -61,6 +61,6 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .box {
-  @apply inline-block h-[100px] px-5 leading-[100px] bg-gray-300;
+  @apply inline-block h-[100px] bg-gray-300 px-5 leading-[100px];
 }
 </style>
