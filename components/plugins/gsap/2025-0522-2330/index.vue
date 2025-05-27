@@ -21,6 +21,29 @@ onMounted(async () => {
     yoyo: true,
     repeat: -1
   })
+
+  const timeline1 = gsap.timeline()
+  timeline1.to('.box-timeline-1', {
+    x: () => window.innerWidth / 2,
+    ease: 'expoScale(0.5,7,none)',
+    yoyo: true,
+    repeat: -1,
+    duration: 2
+  })
+  timeline1.to('.box-timeline-2', {
+    x: () => window.innerWidth / 2,
+    ease: 'expoScale(0.5,7,none)',
+    yoyo: true,
+    repeat: -1,
+    duration: 1
+  })
+  timeline1.to('.box-timeline-3', {
+    x: () => window.innerWidth / 2,
+    ease: 'expoScale(0.5,7,none)',
+    yoyo: true,
+    repeat: -1,
+    duration: 1
+  })
 })
 </script>
 
@@ -42,7 +65,7 @@ onMounted(async () => {
       <code>ease: 'elastic.out(1,0.3)'</code>
     </div>
 
-    <div class="bg-blue-200/20 w-full flex flex-col items-start gap-2">
+    <div class="bg-blue-200/20 area-style">
       <div class="box box-staggers">
         stagger
       </div>
@@ -56,11 +79,26 @@ onMounted(async () => {
         stagger
       </div>
     </div>
+
+    <div class="bg-red-200/20 area-style">
+      <div class="box box-timeline-1">
+        gsap.timeline()
+      </div>
+      <div class="box box-timeline-2">
+        gsap.timeline()
+      </div>
+      <div class="box box-timeline-3">
+        gsap.timeline()
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .box {
   @apply inline-block h-[100px] bg-gray-300 px-5 leading-[100px];
+}
+.area-style {
+  @apply w-full flex flex-col items-start gap-2;
 }
 </style>
