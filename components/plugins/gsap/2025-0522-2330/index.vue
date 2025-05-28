@@ -52,6 +52,23 @@ const timelineT2Fn = (): void => {
   timeline2.to('.t2 .box-timeline-3', { x: 500 }, '<')
   timeline2.to('.t2 .box-timeline-4', { x: 500 }, '>')
 }
+// 將下列所有 timeline3 設定統一配置在這裡
+const timeline3 = gsap.timeline({
+  repeat: -1,
+  repeatDelay: 1,
+  yoyo: true
+})
+const timelineT3Fn = (): void => {
+  timeline3.to('.t3 .box-timeline-1', {
+    rotation: 360
+  })
+  timeline3.to('.t3 .box-timeline-2', {
+    rotation: 360
+  })
+  timeline3.to('.t3 .box-timeline-3', {
+    rotation: 360
+  })
+}
 
 onMounted(async () => {
   await nextTick()
@@ -59,12 +76,13 @@ onMounted(async () => {
   easePractice()
   timelineT1Fn()
   timelineT2Fn()
+  timelineT3Fn()
 })
 </script>
 
 <template>
   <main class="m-5 flex flex-col items-start gap-y-3 py-10">
-    <section class="flex w-full flex-col items-start gap-y-3 bg-yellow-100">
+    <section class="flex w-full flex-col items-start gap-y-3 bg-orange-200/20">
       <div class="box box-to">
         <code>gsap.to('.box-to', { x: 500 })</code>
       </div>
@@ -136,6 +154,14 @@ onMounted(async () => {
         <code class="ml-5 bg-black/80 px-2 py-1 text-white">
           { x: 500 }, '>'</code>
       </div>
+    </section>
+
+    <section
+      class="t3 flex w-full flex-row items-center justify-center gap-5 bg-lime-200/20"
+    >
+      <div class="box box-timeline-1 !size-[50px]" />
+      <div class="box box-timeline-2 !size-[50px]" />
+      <div class="box box-timeline-3 !size-[50px]" />
     </section>
   </main>
 </template>
