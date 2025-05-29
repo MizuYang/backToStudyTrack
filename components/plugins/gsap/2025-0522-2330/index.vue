@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Pokemon from './Pokemon.vue'
 const { gsap } = useGsap()
 
 const easePractice = (): void => {
@@ -163,6 +164,8 @@ onMounted(async () => {
       <div class="box box-timeline-2 !size-[50px]" />
       <div class="box box-timeline-3 !size-[50px]" />
     </section>
+
+    <Pokemon />
   </main>
 </template>
 
