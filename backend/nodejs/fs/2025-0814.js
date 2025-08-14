@@ -34,11 +34,31 @@ console.clear()
 
 
 // 追加寫入 (同步)
-try {
-  appendFileSync('./files/追加.txt', '\r\n寫入內容 ' + new Date().toLocaleString());
-  console.log('2 追加寫入成功!');
-} catch (err) {
-  console.error('2 追加寫入失敗:', err);
-}
+// try {
+//   appendFileSync('./files/追加.txt', '\r\n寫入內容 ' + new Date().toLocaleString());
+//   console.log('2 追加寫入成功!');
+// } catch (err) {
+//   console.error('2 追加寫入失敗:', err);
+// }
 
-console.log("3 執行");
+// console.log("3 執行");
+
+
+// writeFile 追加寫入
+writeFile("./files/追加.txt", "\r\n追加寫入 writeFile", {
+  flag: "a"
+}, (err) => {
+  if (err) {
+    console.error("1 寫入檔案失敗:", err);
+    return;
+  }
+  console.log("1 檔案寫入成功!");
+});
+
+// writeFileSync 追加寫入
+// try {
+//   writeFileSync("./files/2025-0814-writeFileSync.txt", "Hello World!!");
+//   console.log("2 檔案寫入成功!");
+// } catch (err) {
+//   console.error("2 寫入檔案失敗:", err);
+// }
