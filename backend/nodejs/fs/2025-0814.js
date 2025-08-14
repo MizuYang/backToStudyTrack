@@ -1,4 +1,4 @@
-import { appendFile, appendFileSync, writeFile, writeFileSync } from "fs";
+import { appendFile, appendFileSync, writeFile, writeFileSync, createWriteStream } from "fs";
 
 console.clear();
 
@@ -53,11 +53,27 @@ console.clear();
 // });
 
 // writeFileSync 追加寫入
-try {
-  writeFileSync("./files/追加.txt", "\r\n追加寫入 writeFileSync", {
-    flag: "a",
-  });
-  console.log("2 檔案寫入成功!");
-} catch (err) {
-  console.error("2 寫入檔案失敗:", err);
-}
+// try {
+//   writeFileSync("./files/追加.txt", "\r\n追加寫入 writeFileSync", {
+//     flag: "a",
+//   });
+//   console.log("2 檔案寫入成功!");
+// } catch (err) {
+//   console.error("2 寫入檔案失敗:", err);
+// }
+
+
+// 串流寫入
+// createWriteStream
+// const ws = createWriteStream('./files/串流寫入.txt')
+
+// ws.write(`串流寫入內容-${Math.random()} \r\n`)
+// ws.write(`串流寫入內容-${Math.random()} \r\n`)
+// ws.write(`串流寫入內容-${Math.random()} \r\n`)
+// ws.write(`串流寫入內容-${Math.random()} \r\n`)
+
+// // 關閉串流(可加可不加，因為程式執行完後 Node.js 會自動關閉串流)
+// ws.close()
+
+// 會出現錯誤，因為串流通道已關閉
+// ws.write(`寫不進去內容 XD`)
