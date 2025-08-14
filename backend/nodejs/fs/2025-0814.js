@@ -1,6 +1,6 @@
-import { appendFile, appendFileSync, writeFile, writeFileSync, createWriteStream } from "fs";
+import { appendFile, appendFileSync, writeFile, writeFileSync, createWriteStream, readFile, readFileSync } from 'fs'
 
-console.clear();
+console.clear()
 
 // 非同步寫入
 // writeFile("./files/2025-0814-writeFile.txt", "Hello World!!", (err) => {
@@ -62,7 +62,6 @@ console.clear();
 //   console.error("2 寫入檔案失敗:", err);
 // }
 
-
 // 串流寫入
 // createWriteStream
 // const ws = createWriteStream('./files/串流寫入.txt')
@@ -77,3 +76,22 @@ console.clear();
 
 // 會出現錯誤，因為串流通道已關閉
 // ws.write(`寫不進去內容 XD`)
+
+// 文件讀取
+// 非同步讀取
+readFile('./files/串流寫入.txt', (err, data) => {
+  if (err) {
+    console.error('讀取檔案失敗:', err)
+    return
+  }
+  console.log('讀取檔案成功:\n', data.toString())
+})
+
+// 同步讀取
+try {
+  const data = readFileSync('./files/串流寫入.txt')
+  console.log('讀取檔案成功:', data.toString())
+} catch (err) {
+  console.error('讀取檔案失敗:', err)
+}
+
