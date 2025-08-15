@@ -1,4 +1,13 @@
-import { appendFile, appendFileSync, writeFile, writeFileSync, createWriteStream, readFile, readFileSync } from 'fs'
+import {
+  // appendFile,
+  // appendFileSync,
+  // writeFile,
+  // writeFileSync,
+  // createWriteStream,
+  // readFile,
+  // readFileSync,
+  createReadStream
+} from 'fs'
 
 console.clear()
 
@@ -79,19 +88,46 @@ console.clear()
 
 // 文件讀取
 // 非同步讀取
-readFile('./files/串流寫入.txt', (err, data) => {
-  if (err) {
-    console.error('讀取檔案失敗:', err)
-    return
-  }
-  console.log('讀取檔案成功:\n', data.toString())
-})
+// readFile('./files/串流寫入.txt', (err, data) => {
+//   if (err) {
+//     console.error('讀取檔案失敗:', err)
+//     return
+//   }
+//   console.log('讀取檔案成功:\n', data.toString())
+// })
 
 // 同步讀取
-try {
-  const data = readFileSync('./files/串流寫入.txt')
-  console.log('讀取檔案成功:', data.toString())
-} catch (err) {
-  console.error('讀取檔案失敗:', err)
-}
+// try {
+//   const data = readFileSync('./files/串流寫入.txt')
+//   console.log('讀取檔案成功:', data.toString())
+// } catch (err) {
+//   console.error('讀取檔案失敗:', err)
+// }
 
+// 流式讀取
+const rs = createReadStream('./test.mp4')
+
+// data 事件, 獲取讀取的資料
+rs.on('data', (chunk) => {
+  console.log('讀取到資料塊:', chunk) // 這裡的 chunk 是 Buffer 對象
+  console.log('讀取到資料塊:', chunk.length)
+})
+
+// 讀取完畢
+rs.on('end', () => {
+  console.log('讀取完成')
+})
+
+/**
+ *
+ * output:
+    ...
+    讀取到資料塊: 65536
+    讀取到資料塊: 65536
+    讀取到資料塊: 65536
+    讀取到資料塊: 65536
+    讀取到資料塊: 65536
+    讀取到資料塊: 65536
+    讀取到資料塊: 59718 (最後一塊會比較少一點，是因為最後一塊的資料不足完整的一塊)
+    讀取完成
+ */
