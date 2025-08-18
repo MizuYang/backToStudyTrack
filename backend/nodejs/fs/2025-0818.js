@@ -57,15 +57,35 @@
 // })
 
 // 讀取狀態
-import { stat } from 'fs'
+// import { stat } from 'fs'
 
-stat('./test.mp4', (err, data) => {
+// stat('./test.mp4', (err, data) => {
+//   if (err) {
+//     console.error('讀取檔案狀態失敗:', err)
+//     return
+//   }
+//   // console.log('檔案狀態讀取成功!', data)
+//   console.dir(data)
+//   console.log('是檔案', data.isFile())
+//   console.log('是資料夾', data.isDirectory())
+// })
+
+import { writeFile } from 'fs'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+// 獲取目前檔案的路徑
+const __filename = fileURLToPath(import.meta.url)
+// 獲取目前目錄的路徑
+const __dirname = dirname(__filename)
+console.log(__dirname)
+
+// 所在文件的所在目錄的絕對路徑
+const newPath = `${__dirname}/index.html`
+writeFile(newPath, '<h1>xxx</h1>', (err) => {
   if (err) {
-    console.error('讀取檔案狀態失敗:', err)
+    console.error('寫入檔案失敗:', err)
     return
   }
-  // console.log('檔案狀態讀取成功!', data)
-  console.dir(data)
-  console.log('是檔案', data.isFile())
-  console.log('是資料夾', data.isDirectory())
+  console.log('檔案寫入成功!')
 })
