@@ -46,12 +46,26 @@
 // })
 
 // 刪除資料夾
-import { rm } from 'fs'
-// 遞歸刪除資料夾
-rm('./newFolder', { recursive: true }, (err) => {
+// import { rm } from 'fs'
+// // 遞歸刪除資料夾
+// rm('./newFolder', { recursive: true }, (err) => {
+//   if (err) {
+//     console.error('刪除資料夾失敗:', err)
+//     return
+//   }
+//   console.log('資料夾刪除成功!')
+// })
+
+// 讀取狀態
+import { stat } from 'fs'
+
+stat('./test.mp4', (err, data) => {
   if (err) {
-    console.error('刪除資料夾失敗:', err)
+    console.error('讀取檔案狀態失敗:', err)
     return
   }
-  console.log('資料夾刪除成功!')
+  // console.log('檔案狀態讀取成功!', data)
+  console.dir(data)
+  console.log('是檔案', data.isFile())
+  console.log('是資料夾', data.isDirectory())
 })
