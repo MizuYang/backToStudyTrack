@@ -60,9 +60,12 @@ module.exports = {
 
     // TypeScript 特定規則
     '@typescript-eslint/explicit-function-return-type': 'error',
-    '@typescript-eslint/no-explicit-any': 'warn'
+    '@typescript-eslint/no-explicit-any': 'warn',
 
     // 禁止使用 any 類型
     // '@typescript-eslint/no-explicit-any': 'warn',
+
+    // 函式必須有返回類型
+    '@typescript-eslint/explicit-function-return-type': ''
   }
 }
