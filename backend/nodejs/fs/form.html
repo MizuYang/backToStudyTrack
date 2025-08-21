@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <!-- 指定網頁的字元編碼 -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- 控制網頁在不同裝置上的顯示比例，對於響應式設計很重要 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <!-- 定義網頁的標題，顯示在搜尋結果中 -->
+    <title>請輸入網頁標題</title>
+  </head>
+
+  <body>
+    <!-- 模擬 post 請求來取得請求體 -->
+    <!-- action 請輸入 nodejs server.listen 的位置 -->
+    <form action="http://localhost:3000" method="post">
+      <input type="text" name="name" placeholder="請輸入您的名字" autofocus />
+      <button type="submit" value="送出">送出</button>
+    </form>
+  </body>
+</html>

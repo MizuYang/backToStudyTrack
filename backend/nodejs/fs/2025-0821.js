@@ -1,7 +1,6 @@
-import { clear } from "console";
 import http from "http";
 
-clear();
+console.clear();
 
 const server = http.createServer((req, res) => {
   // 取得網址
@@ -36,5 +35,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(3000, () => {
-  console.log("伺服器開始連接...");
+  console.log("伺服器開始連接... http://localhost:3000");
 });
