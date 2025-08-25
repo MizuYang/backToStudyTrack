@@ -19,6 +19,9 @@ const server = http.createServer((req, res) => {
 
   res.setHeader("Content-Type", "text/html; charset=utf-8");
 
+  // 設定多個同名響應頭
+  // res.setHeader("Set-Cookie", ["a", "b", "c"]);
+
   if (req.url === "/login" || req.url === "/register") {
     // 取得當前檔案路徑
     const filePath = url.fileURLToPath(import.meta.url);
