@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import url from "url";
+import fs from "fs";
 
 const app = express();
 
@@ -36,6 +37,29 @@ app.get("/", (req, res) => {
 
 app.get("/redirect-page", (req, res) => {
   res.send("你被導向到這個頁面了");
+});
+
+const recordEntryTimeMiddleware = (req, res, next) => {
+  try {
+    const _dirname = url.fileURLToPath(import.meta.url);
+    const _filename = path.dirname(_dirname);
+    const file = path.resolve(_filename, "./files/追加.txt");
+    const now = new Date().toLocaleString();
+    fs.appendFileSync(file, `\n ${req.path} => ${now}`);
+  } catch (err) {
+    console.error(err);
+  }
+  next();
+};
+
+// 全域的 middleware 
+app.use(recordEntryTimeMiddleware);
+
+app.get("/page-a", (req, res) => {
+  res.send("a");
+});
+app.get("/page-b", (req, res) => {
+  res.send("b");
 });
 
 app.listen(8888, () => {
