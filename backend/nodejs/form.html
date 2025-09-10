@@ -17,8 +17,11 @@
   <body>
     <!-- 模擬 post 請求來取得請求體 -->
     <!-- action 請輸入 nodejs server.listen 的位置 -->
-    <form action="http://localhost:3000" method="post">
+    <form action="http://localhost:8888/login" method="post">
       <input type="text" name="name" placeholder="請輸入您的名字" autofocus />
+      <br />
+      <input type="text" name="account" placeholder="請輸入您的帳號" /> <br />
+      <input type="text" name="password" placeholder="請輸入您的密碼" /> <br />
       <button type="submit" value="送出">送出</button>
     </form>
 
