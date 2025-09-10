@@ -34,6 +34,19 @@ app.post("/login", urlencodedParser, (req, res) => {
   res.send("/login => post");
 });
 
+app.get("/images", (req, res) => {
+  // 如果不是從 localhost 來的請求，就回傳錯誤
+  if (req.hostname !== "localhost") {
+    return res.status(400).send("錯誤的 Host");
+  }
+
+  const _filename = url.fileURLToPath(import.meta.url);
+  const _dirname = path.dirname(_filename);
+  const filePath = path.resolve(`${_dirname}/ai.png`);
+
+  res.sendFile(filePath);
+});
+
 app.listen(8888, () => {
   console.log("伺服器開啟");
 });
