@@ -2,6 +2,7 @@ import express from "express";
 import url from "url";
 import path from "path";
 import bodyParser from "body-parser";
+import routerDemoRouter from "./0910-router.js";
 
 /**
  * GET  /login 顯示表單網頁
@@ -16,6 +17,17 @@ const jsonParser = bodyParser.json();
 // 解析 query string 格式的請求體
 const urlencodedParser = bodyParser.urlencoded();
 
+// 將下面的 page1, page2 使用外部路由模組
+app.use(routerDemoRouter);
+
+// app.get("/page1", (req, res) => {
+//   res.send("page1");
+// });
+
+// app.get("/page2", (req, res) => {
+//   res.send("page2");
+// });
+
 // http://localhost:8888/form
 app.get("/form", (req, res) => {
   const _filename = url.fileURLToPath(import.meta.url);
@@ -27,6 +39,7 @@ app.get("/form", (req, res) => {
 app.get("/login", (req, res) => {
   res.send("/login => get");
 });
+
 // 在此設定路由的請求體解析設定
 app.post("/login", urlencodedParser, (req, res) => {
   // 這邊就能透過 req.body 取得請求體
