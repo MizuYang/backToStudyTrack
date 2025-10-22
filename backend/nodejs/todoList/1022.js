@@ -110,7 +110,7 @@ app.post("/todoList", (req, res) => {
   }
 });
 
-// 編輯待辦事項
+// 編輯待辦事項(patch)
 app.patch("/todoList/:id", (req, res) => {
   try {
     const { id } = req.params;
@@ -132,6 +132,46 @@ app.patch("/todoList/:id", (req, res) => {
     }
 
     todos[todoIndex].title = req.body.title;
+
+    res.status(200).json({
+      statusCode: 200,
+      data: todos[todoIndex],
+      message: "編輯待辦事項成功",
+    });
+  } catch (err) {
+    return res.status(400).json({
+      statusCode: 400,
+      data: {},
+      message: "編輯失敗，沒有傳送資料或 title 為空",
+    });
+  }
+});
+
+// 編輯待辦事項(put)
+app.put("/todoList/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.body || !id || !req.body.title.trim()) {
+      return res.status(400).json({
+        statusCode: 400,
+        data: {},
+        message: "編輯失敗，沒有傳送資料或 title 為空",
+      });
+    }
+
+    const todoIndex = todos.findIndex((item) => item.id === id);
+    if (todoIndex === -1) {
+      return res.status(400).json({
+        statusCode: 400,
+        data: {},
+        message: "編輯失敗，查無此待辦事項",
+      });
+    }
+
+    todos[todoIndex] = {
+      ...todos[todoIndex],
+      title: req.body.title,
+    };
 
     res.status(200).json({
       statusCode: 200,
