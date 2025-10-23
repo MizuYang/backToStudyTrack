@@ -187,6 +187,55 @@ app.put("/todoList/:id", (req, res) => {
   }
 });
 
+// 刪除單一待辦事項
+app.delete("/todoList/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({
+        statusCode: 400,
+        data: {},
+        message: "刪除失敗，缺少參數 id",
+      });
+    }
+
+    const todoIndex = todos.findIndex((item) => item.id === id);
+
+    if (todoIndex === -1) {
+      return res.status(400).json({
+        statusCode: 400,
+        data: {},
+        message: "刪除失敗，查無此待辦事項",
+      });
+    }
+
+    todos.splice(todoIndex, 1);
+
+    res.status(200).json({
+      statusCode: 200,
+      data: {},
+      message: "刪除待辦事項成功",
+    });
+  } catch (err) {
+    return res.status(400).json({
+      statusCode: 400,
+      data: {},
+      message: "刪除失敗，查無此待辦事項",
+    });
+  }
+});
+
+// 刪除所有待辦事項
+app.delete("/todoList", (req, res) => {
+  todos.length = 0;
+
+  res.status(200).json({
+    statusCode: 200,
+    data: todos,
+    message: "刪除所有待辦事項成功",
+  });
+});
+
 app.listen(8080, () => {
   console.log("伺服器連線成功");
 });
