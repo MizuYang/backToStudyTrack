@@ -1,0 +1,24 @@
+{
+  "Vue3 TypeScript SCSS Component": {
+    "prefix": "v:base:full:scss",
+    "body": [
+      "<script lang=\"ts\" setup>",
+      "$1",
+      "</script>",
+      "",
+      "<template>",
+      "  <div class=\"${2:component-name}\">",
+      "    $3",
+      "  </div>",
+      "</template>",
+      "",
+      "<style lang=\"scss\" scoped>",
+      ".${2:component-name} {",
+      "  $0",
+      "}",
+      "</style>",
+    ],
+    "description": "Create a Vue 3 component with TypeScript setup and scoped SCSS",
+    "scope": "vue",
+  },
+}
