@@ -61,12 +61,23 @@ console.log("Todo: ", Todo);
 // Todo.insertOne({});
 
 // 1. 透過 new <collection> + save() 新增實例
-const newTodo = new Todo({
-  title: "記得買菜",
-});
+// const newTodo = new Todo({
+//   title: "記得買菜",
+// });
 
-newTodo
-  .save()
+// newTodo
+//   .save()
+//   .then(() => {
+//     console.log("資料新增成功");
+//   })
+//   .catch((err) => {
+//     console.error("資料新增失敗", err);
+//   });
+
+// 2. 透過 <collection>.create() 新增資料
+Todo.create({
+  title: "準備開會321",
+})
   .then(() => {
     console.log("資料新增成功");
   })
