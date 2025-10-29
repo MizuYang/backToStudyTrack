@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 const app = express();
 
 mongoose
-  .connect("mongodb://localhost:27017/mizuDB")
+  .connect("mongodb://localhost:27017/todoList")
   .then(() => {
     console.log("MongoDB 連線成功");
   })
@@ -39,6 +39,40 @@ const todos = [
     title: "完成 Express 練習",
   },
 ];
+
+// schema
+const todoSchema = {
+  title: {
+    type: String,
+    required: [true, "標題必填"],
+  },
+  isFinished: {
+    type: Boolean,
+    default: false,
+  },
+};
+
+// model
+const Todo = new mongoose.model("TodoList", todoSchema);
+
+console.log("Todo: ", Todo);
+
+// shell 指令
+// Todo.insertOne({});
+
+// 1. 透過 new <collection> + save() 新增實例
+const newTodo = new Todo({
+  title: "記得買菜",
+});
+
+newTodo
+  .save()
+  .then(() => {
+    console.log("資料新增成功");
+  })
+  .catch((err) => {
+    console.error("資料新增失敗", err);
+  });
 
 // 解析前端傳來的 JSON 資料, 使後端能直接使用 req.body 取得資料
 app.use(express.json());
