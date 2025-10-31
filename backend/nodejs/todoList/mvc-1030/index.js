@@ -2,14 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 // 建立資料庫連線
-mongoose
-  .connect("mongodb://127.0.0.1:27017/todoList")
-  .then(() => {
-    console.log("MongoDB 連線成功");
-  })
-  .catch((err) => {
-    console.error("MongoDB 連線失敗", err);
-  });
+import "./connections/index.js";
 
 const app = express();
 
