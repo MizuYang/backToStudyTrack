@@ -47,6 +47,39 @@ app.use(
   }),
 );
 
+// 建立路由
+
+// get all
+app.get("/api/todoList", async (req, res) => {
+  const data = await TodoList.find();
+
+  res.send({
+    statusCode: 200,
+    message: "取得待辦成功",
+    data,
+  });
+});
+
+// get single
+app.get("/api/todoList/:id", async (req, res) => {
+  try {
+    const { id = "" } = req.params;
+    const data = await TodoList.findOne({ _id: id });
+
+    res.send({
+      statusCode: 200,
+      message: "取得待辦成功",
+      data,
+    });
+  } catch (err) {
+    res.send({
+      statusCode: 400,
+      message: "取得待辦失敗",
+      data: null,
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log("伺服器連線成功: ", PORT);
 });
