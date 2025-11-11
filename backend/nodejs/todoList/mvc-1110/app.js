@@ -151,6 +151,54 @@ app.post(`${BASE_URL}/multiple`, async (req, res) => {
   }
 });
 
+// delete all
+app.delete(`${BASE_URL}`, async (req, res) => {
+  const data = await TodoList.deleteMany();
+
+  try {
+    res.send({
+      statusCode: 200,
+      message: "成功",
+      data,
+    });
+  } catch (err) {
+    res.send({
+      statusCode: 400,
+      message: "失敗",
+      data: null,
+    });
+  }
+});
+
+// delete single
+app.delete(`${BASE_URL}/:id`, async (req, res) => {
+  try {
+    const { id = "" } = req.params;
+
+    const data = await TodoList.deleteOne({ _id: id });
+
+    if (data.deletedCount === 0) {
+      return res.send({
+        statusCode: 400,
+        message: "刪除失敗，無此 ID",
+        data: null,
+      });
+    }
+
+    res.send({
+      statusCode: 200,
+      message: "成功",
+      data,
+    });
+  } catch (err) {
+    res.send({
+      statusCode: 400,
+      message: "失敗",
+      data: null,
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log("伺服器連線成功: ", PORT);
 });
