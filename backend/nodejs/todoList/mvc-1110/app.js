@@ -54,7 +54,7 @@ app.use(
 app.get(`${BASE_URL}`, async (req, res) => {
   const data = await TodoList.find();
 
-  res.send({
+  res.status(200).send({
     statusCode: 200,
     message: "成功",
     data,
@@ -67,13 +67,13 @@ app.get(`${BASE_URL}/:id`, async (req, res) => {
     const { id = "" } = req.params;
     const data = await TodoList.findOne({ _id: id });
 
-    res.send({
+    res.status(200).send({
       statusCode: 200,
       message: "成功",
       data,
     });
   } catch (err) {
-    res.send({
+    res.status(400).send({
       statusCode: 400,
       message: "失敗",
       data: null,
@@ -86,7 +86,7 @@ app.post(`${BASE_URL}`, async (req, res) => {
   const { title = "" } = req.body;
 
   if (typeof title !== "string" || title?.trim() === "") {
-    return res.send({
+    return res.status(400).send({
       statusCode: 400,
       message: "失敗",
       data: null,
@@ -96,7 +96,7 @@ app.post(`${BASE_URL}`, async (req, res) => {
   const todo = { title: title.trim(), isFinished: false };
   const data = await TodoList.create(todo);
 
-  res.send({
+  res.status(200).send({
     statusCode: 200,
     message: "成功",
     data,
@@ -111,14 +111,14 @@ app.post(`${BASE_URL}/multiple`, async (req, res) => {
     console.log("todos: ", todos);
 
     if (!Array.isArray(todos)) {
-      res.send({
+      res.status(400).send({
         statusCode: 400,
         message: "請傳入陣列格式",
         data: null,
       });
     }
     if (todos.length === 0) {
-      res.send({
+      res.status(400).send({
         statusCode: 400,
         message: "請傳入一筆以上的資料",
         data: null,
@@ -128,7 +128,7 @@ app.post(`${BASE_URL}/multiple`, async (req, res) => {
       (todo) => typeof todo.title === "string" && todo.title.trim() !== "",
     );
     if (!isValid) {
-      res.send({
+      res.status(400).send({
         statusCode: 400,
         message: "資料格式錯誤",
         data: null,
@@ -137,13 +137,13 @@ app.post(`${BASE_URL}/multiple`, async (req, res) => {
 
     const data = await TodoList.insertMany(todos);
 
-    res.send({
+    res.status(200).send({
       statusCode: 200,
       message: "成功",
       data,
     });
   } catch (err) {
-    res.send({
+    res.status(400).send({
       statusCode: 400,
       message: "失敗",
       data: null,
@@ -156,13 +156,13 @@ app.delete(`${BASE_URL}`, async (req, res) => {
   const data = await TodoList.deleteMany();
 
   try {
-    res.send({
+    res.status(200).send({
       statusCode: 200,
       message: "成功",
       data,
     });
   } catch (err) {
-    res.send({
+    res.status(400).send({
       statusCode: 400,
       message: "失敗",
       data: null,
@@ -178,20 +178,112 @@ app.delete(`${BASE_URL}/:id`, async (req, res) => {
     const data = await TodoList.deleteOne({ _id: id });
 
     if (data.deletedCount === 0) {
-      return res.send({
+      return res.status(400).send({
         statusCode: 400,
         message: "刪除失敗，無此 ID",
         data: null,
       });
     }
 
-    res.send({
+    res.status(200).send({
       statusCode: 200,
       message: "成功",
       data,
     });
   } catch (err) {
-    res.send({
+    res.status(400).send({
+      statusCode: 400,
+      message: "失敗",
+      data: null,
+    });
+  }
+});
+
+// patch multiple
+app.patch(`${BASE_URL}/multiple`, async (req, res) => {
+  try {
+    const todos = req.body.data;
+
+    if (!Array.isArray(todos)) {
+      res.status(400).send({
+        statusCode: 400,
+        message: "請傳入陣列格式",
+        data: null,
+      });
+    }
+
+    if (todos.length === 0) {
+      res.status(400).send({
+        statusCode: 400,
+        message: "請傳入一筆以上的資料",
+        data: null,
+      });
+    }
+
+    const updateCase = todos.map((todo) => {
+      if (!todo._id) {
+        res.status(400).send({
+          statusCode: 400,
+          message: "缺少待更新資料的 ID",
+          data: null,
+        });
+      }
+      if (typeof todo.title !== "string" || !todo.title.trim()) {
+        res.status(400).send({
+          statusCode: 400,
+          message: "缺少待更新資料的標題或格式錯誤",
+          data: null,
+        });
+      }
+
+      return {
+        updateOne: {
+          filter: { _id: todo._id },
+          update: { title: todo.title },
+        },
+      };
+    });
+
+    const data = await TodoList.bulkWrite(updateCase);
+
+    res.status(200).send({
+      statusCode: 200,
+      message: "成功",
+      data,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(400).send({
+      statusCode: 400,
+      message: "失敗",
+      data: null,
+    });
+  }
+});
+
+// patch single
+app.patch(`${BASE_URL}/:id`, async (req, res) => {
+  try {
+    const { id = "" } = req.params;
+    const { title = "" } = req.body;
+
+    const data = await TodoList.updateOne({ _id: id }, { title });
+
+    if (data.modifiedCount === 0) {
+      res.status(400).send({
+        statusCode: 400,
+        message: "更新失敗，無此 ID 或資料無變更",
+        data: null,
+      });
+    }
+
+    res.status(200).send({
+      statusCode: 200,
+      message: "成功",
+      data,
+    });
+  } catch (err) {
+    res.status(400).send({
       statusCode: 400,
       message: "失敗",
       data: null,
