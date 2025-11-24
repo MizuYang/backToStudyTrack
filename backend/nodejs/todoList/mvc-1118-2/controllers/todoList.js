@@ -71,7 +71,7 @@ export const todoListController = {
         errorHandler(req, res, 400, "title 不可為空");
         return;
       }
-      const newData = await TodoList.insertOne({
+      const newData = await TodoList.create({
         title,
         completed: false,
       });

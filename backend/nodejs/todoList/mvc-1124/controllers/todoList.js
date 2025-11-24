@@ -1,11 +1,16 @@
 import { TodoList } from "../model/todoListModel.js";
+import { User } from "../model/userModel.js";
 import { successHandler } from "../service/successHandler.js";
 import { errorHandler } from "../service/errorHandler.js";
 
 export const todoListController = {
   async getTodos(req, res) {
     try {
-      const data = await TodoList.find();
+      // const data = await TodoList.find().populate("user"); // 撈出所有 user 欄位資料的簡寫
+      const data = await TodoList.find().populate({
+        path: "user",
+        select: "username age email",
+      });
       successHandler(req, res, 200, "取得待辦清單成功", data);
     } catch (err) {
       console.error(err);
@@ -19,7 +24,10 @@ export const todoListController = {
         errorHandler(req, res, 400, "缺少 id 參數");
         return;
       }
-      const data = await TodoList.findOne({ _id: id });
+      const data = await TodoList.findOne({ _id: id }).populate({
+        path: "user",
+        select: "username age email",
+      });
       if (!data) {
         errorHandler(req, res, 404, "找不到該筆待辦清單");
         return;
@@ -47,10 +55,16 @@ export const todoListController = {
         errorHandler(req, res, 400, "每筆待辦清單的 title 必須為非空字串");
         return;
       }
+      // 先取得所有使用者
+      // 並使用第一位使用者的 _id 作為待辦清單的 user 欄位
+      const users = await User.find();
+      const userId = users.length > 0 ? users[0]._id : null;
+
       const newData = data.map((todo) => {
         return {
           title: todo.title,
           completed: false,
+          user: userId,
         };
       });
       const result = await TodoList.insertMany(newData);
@@ -71,9 +85,15 @@ export const todoListController = {
         errorHandler(req, res, 400, "title 不可為空");
         return;
       }
-      const newData = await TodoList.insertOne({
+      // 先取得所有使用者
+      // 並使用第一位使用者的 _id 作為待辦清單的 user 欄位
+      const users = await User.find();
+      const userId = users.length > 0 ? users[0]._id : null;
+
+      const newData = await TodoList.create({
         title,
         completed: false,
+        user: userId,
       });
       successHandler(req, res, 200, "新增待辦清單成功", newData);
     } catch (err) {

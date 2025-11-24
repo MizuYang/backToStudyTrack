@@ -10,6 +10,11 @@ const todoListSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: "user",
+      required: [true, "請提供使用者 ID"],
+    },
   },
   {
     versionKey: false,
