@@ -1,22 +1,23 @@
 import express from "express";
 import { todoListController } from "../controllers/todoList.js";
+import { handleErrorAsync } from "../service/handleErrorAsync.js";
 
 const router = express.Router();
 
 // get
-router.get("/todos", todoListController.getTodos);
-router.get("/todo/:id", todoListController.getTodo);
+router.get("/todos", handleErrorAsync(todoListController.getTodos));
+router.get("/todo/:id", handleErrorAsync(todoListController.getTodo));
 
 // post
-router.post("/todos", todoListController.createTodos);
-router.post("/todo", todoListController.createTodo);
+router.post("/todos", handleErrorAsync(todoListController.createTodos));
+router.post("/todo", handleErrorAsync(todoListController.createTodo));
 
 // delete
-router.delete("/todos", todoListController.deleteTodos);
-router.delete("/todo/:id", todoListController.deleteTodo);
+router.delete("/todos", handleErrorAsync(todoListController.deleteTodos));
+router.delete("/todo/:id", handleErrorAsync(todoListController.deleteTodo));
 
 // patch
-router.patch("/todos", todoListController.updateTodos);
-router.patch("/todo/:id", todoListController.updateTodo);
+router.patch("/todos", handleErrorAsync(todoListController.updateTodos));
+router.patch("/todo/:id", handleErrorAsync(todoListController.updateTodo));
 
 export default router;

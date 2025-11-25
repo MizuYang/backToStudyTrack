@@ -12,7 +12,9 @@ export const httpController = {
   notFound(req, res) {
     errorHandler(req, res, 404, "找不到頁面");
   },
-  globalErrorHandler(req, res) {
-    errorHandler(req, res, 500, "伺服器錯誤");
+  globalErrorHandler(err, req, res) {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || "伺服器錯誤";
+    errorHandler(req, res, statusCode, message);
   },
 };
