@@ -1,3 +1,18 @@
+// 錯誤處理應該放在最前面，確保在程式啟動過程中就能捕捉錯誤
+process.on("uncaughtException", (err) => {
+  // 記錄錯誤下來，等到服務都處理完後，停掉該 process
+  console.error("Uncaught Exception！");
+  console.error(err);
+  process.exit(1);
+});
+
+// 未捕捉到的 catch
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("未捕捉到的 rejection：", promise, "原因：", reason);
+  // 記錄於 log 上
+  process.exit(1);
+});
+
 import express from "express";
 import todoListRouter from "./routers/todoList.js";
 import { httpController } from "./controllers/http.js";
@@ -39,6 +54,8 @@ app.use(BASE_URL, todoListRouter);
 app.use((req, res) => httpController.notFound(req, res));
 
 // 全域錯誤處理
-app.use((err, req, res) => httpController.globalErrorHandler(req, res));
+app.use((err, req, res, next) => {
+  httpController.globalErrorHandler(err, req, res, next);
+});
 
 export default app;
