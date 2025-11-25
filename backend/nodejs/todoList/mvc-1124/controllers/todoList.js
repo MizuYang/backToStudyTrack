@@ -11,6 +11,11 @@ export const todoListController = {
         path: "user",
         select: "username age email",
       });
+      // res.cookie("mizuNo", "aa123456", {
+      //   httpOnly: true, // 只能透過後端存取 cookie
+      //   secure: false, // true 的話只能用在 https
+      //   maxAge: 24 * 60 * 60 * 1000, // cookie 有效期限 1 天
+      // });
       successHandler(req, res, 200, "取得待辦清單成功", data);
     } catch (err) {
       console.error(err);
