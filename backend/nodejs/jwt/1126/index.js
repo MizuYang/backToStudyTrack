@@ -27,3 +27,15 @@ const hash = await bcrypt.hash(password, salt);
 console.log(await validator.isEmail("8catCute@bar.com")); // true
 // 是否為有效的字串長度
 console.log(isLength("8catCute", { min: 5, max: 20 })); // true
+
+const strongPassword = "MyPass123";
+
+const isValid = await validator.isStrongPassword(strongPassword, {
+  minLength: 8, // 最小長度 8
+  minLowercase: 1, // 至少 1 個小寫
+  minUppercase: 1, // 至少 1 個大寫
+  minNumbers: 1, // 至少 1 個數字
+  minSymbols: 0, // 不要求特殊符號(預設是 1)
+});
+
+console.log("強密碼驗證結果: ", isValid); // true 或 false
