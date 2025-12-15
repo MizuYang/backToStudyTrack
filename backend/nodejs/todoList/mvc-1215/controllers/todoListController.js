@@ -1,5 +1,6 @@
 import { TodoList } from "../model/todoListModel.js";
 import { User } from "../model/userModel.js";
+import { handleResponse } from "../service/handleResponse.js";
 
 export const todoListController = {
   async getTodoLists(req, res) {
@@ -8,7 +9,8 @@ export const todoListController = {
       select: "username age",
     });
 
-    res.json({
+    handleResponse({
+      res,
       status: "success",
       statusCode: 200,
       message: "取得待辦清單成功",
@@ -17,43 +19,50 @@ export const todoListController = {
   },
   async getTodoList(req, res) {
     console.log("取得待辦清單");
-    res.json({
+    handleResponse({
+      res,
       status: "success",
     });
   },
   async createTodoLists(req, res) {
     console.log("取得待辦清單");
-    res.json({
+    handleResponse({
+      res,
       status: "success",
     });
   },
   async createTodoList(req, res) {
     console.log("取得待辦清單");
-    res.json({
+    handleResponse({
+      res,
       status: "success",
     });
   },
   async deleteTodoLists(req, res) {
     console.log("取得待辦清單");
-    res.json({
+    handleResponse({
+      res,
       status: "success",
     });
   },
   async deleteTodoList(req, res) {
     console.log("取得待辦清單");
-    res.json({
+    handleResponse({
+      res,
       status: "success",
     });
   },
   async updateTodoLists(req, res) {
     console.log("取得待辦清單");
-    res.json({
+    handleResponse({
+      res,
       status: "success",
     });
   },
   async updateTodoList(req, res) {
     console.log("取得待辦清單");
-    res.json({
+    handleResponse({
+      res,
       status: "success",
     });
   },

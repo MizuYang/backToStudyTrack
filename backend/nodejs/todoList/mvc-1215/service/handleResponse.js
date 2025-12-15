@@ -1,6 +1,6 @@
 export const handleResponse = ({
-  req,
   res,
+  status,
   statusCode,
   message,
   data,
@@ -9,14 +9,14 @@ export const handleResponse = ({
 }) => {
   if (err) {
     if (process.env.NODE_ENV === "production") {
-      res.json({
-        status: "error",
+      return res.status(statusCode || 500).json({
+        status: status || "error",
         statusCode: statusCode || 500,
         message: message || "伺服器錯誤，請稍後再試",
       });
     } else {
-      res.json({
-        status: "error",
+      return res.status(statusCode || 500).json({
+        status: status || "error",
         statusCode: statusCode || 500,
         message: message || "伺服器錯誤，請稍後再試",
         error: err.message,
@@ -25,7 +25,10 @@ export const handleResponse = ({
     }
   }
 
-  res.json({
-    status: "success",
+  res.status(statusCode).json({
+    status,
+    statusCode,
+    message,
+    data,
   });
 };

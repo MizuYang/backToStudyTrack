@@ -1,20 +1,23 @@
 import cors from "cors";
+import { handleResponse } from "../service/handleResponse.js";
 
-// TODO: 之後再將錯誤訊息區分環境, 開發環境顯示詳細錯誤訊息, 產品環境顯示簡易錯誤訊息
 export const httpController = {
   cors: cors(),
   errorHandler: (err, req, res, next) => {
-    res.status(500).json({
+    handleResponse({
+      res,
       status: "error",
       statusCode: 500,
       message: `伺服器錯誤，請稍後再試: ${err.message}`,
+      err,
     });
   },
   notFoundHandler: (req, res, next) => {
-    res.status(404).json({
+    handleResponse({
+      res,
       status: "fail",
       statusCode: 404,
-      message: "404 Not Found",
+      message: `找不到路徑: ${req.method} ${req.path}`,
     });
   },
   uncaughtException: (err) => {
